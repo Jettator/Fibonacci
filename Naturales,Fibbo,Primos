@@ -42,14 +42,8 @@ namespace fibo
                 Console.WriteLine("Rango");
                 Console.Write("Hasta que numero quiere que llegue? ");
                 n = int.Parse(Console.ReadLine());
-                Console.Write("A ");
-                a = int.Parse(Console.ReadLine());
-                Console.Write("B ");
-                b = int.Parse(Console.ReadLine());
-                Console.Write("C ");
-                c = int.Parse(Console.ReadLine());
                 
-                Func<int> contadorfibo = fibo(a,b,c,n);
+                Func<int> contadorfibo = fibo();
                 for (int i = 2; i < n; i++)
                 {
                     Console.WriteLine(contadorfibo());
@@ -80,7 +74,7 @@ namespace fibo
             return () => n++;
         }
 
-           static Func<int> fibo(int a, int b, int c, int n)
+           static Func<int> fibo()
         {
             int a = 0;
             int b = 1;
@@ -101,16 +95,24 @@ namespace fibo
 
         static Func<int> primos(int n)
         {
-            int valor=0, i;
-             for (i = 2; i <= n; i++)
-           {
+             bool Check = true;
+            for (int i = 2; i < n; i++)
+            {
+                for (int e = 2; e < 100; e++)
+                {
+                    if (i != e && i % e == 0)
+                    {
+                        Check = false;
+                        break;
+                    }
+                }
 
-               if (i % 2 != 0)
-               {
-                    Console.WriteLine(i);
-               }
-           }
-            return () => valor;
+                if (Check)
+                {
+                   yield return i;
+                }
+
+                Check = true;
         }
         
  
