@@ -1,0 +1,113 @@
+using System;
+
+namespace fibo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int op;
+            Console.WriteLine("****************Menu****************");
+            Console.WriteLine("*1) Serie de los numeros naturales *");
+            Console.WriteLine("*2) Serie de Fibonacci             *");
+            Console.WriteLine("*3) Serie de los numeros primos    *");
+            Console.WriteLine("*4) Salir                          *");
+            Console.WriteLine("************************************");
+
+            op = int.Parse(Console.ReadLine());
+            Menu(op);
+           
+        }
+
+        static void Menu(int op)
+        {
+            int n;
+
+             switch (op)
+            {
+                case 1:
+                Console.WriteLine("Hasta que numero quiere que se ejecute? ");
+                Console.Write("Numero final: ");
+                n = int.Parse(Console.ReadLine());
+                Func<int> contador = naturales();
+                for (int i = 0; i<=n; i++)
+                {
+                    
+                    Console.WriteLine(contador());
+                }
+                break;
+
+                case 2:
+                int a, b, c;
+                Console.WriteLine("Rango");
+                Console.Write("Hasta que numero quiere que llegue? ");
+                n = int.Parse(Console.ReadLine());
+                Console.Write("A ");
+                a = int.Parse(Console.ReadLine());
+                Console.Write("B ");
+                b = int.Parse(Console.ReadLine());
+                Console.Write("C ");
+                c = int.Parse(Console.ReadLine());
+                
+                Func<int> contadorfibo = fibo(a,b,c,n);
+                for (int i = 2; i < n; i++)
+                {
+                    Console.WriteLine(contadorfibo());
+                }
+                break;
+                
+                case 3:
+                Console.WriteLine("Hasta que numero quiere que se ejecute? ");
+                Console.Write("Numero final: ");
+                n = int.Parse(Console.ReadLine());
+        
+                Func<int> contadorp = primos(n);
+                for (int i = 0; i<n; i++)
+                {
+                  Console.WriteLine(contadorp());
+                }
+                break;
+
+                case 4:
+                System.Environment.Exit(1);
+                break;
+            }
+        }
+
+        static Func<int> naturales()
+        {
+            int n = 0;
+            return () => n++;
+        }
+
+           static Func<int> fibo(int a, int b, int c, int n)
+        {
+            for (int i = 2; i <n; i++)  
+            {  
+                c= a + b;  
+                Console.WriteLine(c);  
+                a= b;  
+                b= c;  
+            }  
+            return () => 0;
+            
+            
+        }
+
+        static Func<int> primos(int n)
+        {
+            int valor=0, i;
+             for (i = 2; i <= n; i++)
+           {
+
+               if (i % 2 != 0)
+               {
+                    Console.WriteLine(i);
+               }
+           }
+            return () => valor;
+        }
+        
+ 
+    }
+}
